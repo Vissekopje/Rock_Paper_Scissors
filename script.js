@@ -6,7 +6,6 @@ let computerScore = 0
 
 function getComputerChoice(){
     random = Math.floor(Math.random()*15) + 1
-    console.log(random)
     if (random >= 1 && random <= 5){
        return "Rock"
     }

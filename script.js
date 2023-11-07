@@ -1,8 +1,18 @@
 
-let playerChoice = "RoCK"
+let playerChoice = ""
 let computerChoice = "Rock"
 let playerScore = 0
 let computerScore = 0
+
+const results = document.querySelector(".results")
+const playerScoreDiv = document.querySelector(".playerScore")
+const computerScoreDiv = document.querySelector (".computerScore")
+const buttonRock = document.querySelector(".Rock")
+const buttonPaper = document.querySelector(".Paper")
+const buttonScissors = document.querySelector(".Scissors")
+const popUpWin = document.querySelector(".popUpWin")
+const winMessage = document.querySelector(".winMessage")
+const restartButton = document.querySelector(".restartButton")
 
 function getComputerChoice(){
     random = Math.floor(Math.random()*15) + 1
@@ -18,47 +28,57 @@ function getComputerChoice(){
     }
 }
 
-function playGame(){
-    for (let i = 0; i < 5; i++) {
-        playRound()
+function checkWin(){
+    if(playerScore == 5){
+        popUpWin.classList.add("show")
+       winMessage.innerText ="You win!, the world is saved"
+
     }
-    if(playerScore > computerScore){
-            return console.log("You win!, the world is saved")
+    else if(computerScore == 5){
+        popUpWin.classList.add("show")
+        winMessage.innerText ="The computers win the world is lost"
     }
-    else if(computerScore > playerScore){
-            return console.log("The computers win the world is lost")
+    else {
+        return
     }
-    else { 
-        return console.log("Nobody wins, so everyone loses")
-    }    
 }
+
+buttonRock.addEventListener("click", function() {
+    playerChoice = "Rock"})
+buttonRock.addEventListener("click", playRound)
+buttonPaper.addEventListener("click", function() {
+    playerChoice = "Paper"})
+buttonPaper.addEventListener("click", playRound)
+buttonScissors.addEventListener("click", function() {
+    playerChoice = "Scissors"})
+buttonScissors.addEventListener("click", playRound)
 
 function playRound(){
     let computerChoice = getComputerChoice()
-    let promptChoice = prompt("Rock, Paper or Scissors?")
-    let playerChoice = promptChoice[0].toUpperCase() + promptChoice.slice(1).toLowerCase()
-    console.log(playerChoice)
-    if (playerChoice == "Rock" && computerChoice == "Paper"){
+    if ((playerChoice == "Paper" && computerChoice == "Scissors") || 
+        (playerChoice == "Scissors" && computerChoice == "Rock") || 
+        (playerChoice == "Rock" && computerChoice == "Paper")){
         computerScore++
-        return console.log("You lose, Paper beats Rock") 
-    }
-    else if (playerChoice == "Paper" && computerChoice == "Scissors"){
-        computerScore++
-        return console.log("You lose, Scissors beat Paper") 
-    }
-    else if (playerChoice == "Scissors" && computerChoice == "Rock"){
-        computerScore++
-        return console.log("You lose, Rock beats Scissors")
+        results.innerText = `You played ${playerChoice}, the computer player ${computerChoice}, you lose`
     }
     else if (playerChoice == computerChoice){
-        return console.log("Its a tie!")
+        results.innerText = `Its a tie, ${playerChoice} does nothing to ${computerChoice}!`
     }
     else { 
         playerScore++
-        return console.log("You win! " + playerChoice + " Beats " + computerChoice)
+        results.innerText = `You win, ${playerChoice} beats ${computerChoice}!`
     }
-    
+    playerScoreDiv.innerText = "Player score: " + playerScore
+    computerScoreDiv.innerText = "Computer score: " + computerScore 
+    checkWin()
 }
-playGame()
-console.log(playerScore)
-console.log(computerScore)
+
+restartButton.addEventListener("click", restart)
+function restart(){
+    playerScore = 0
+    computerScore = 0
+    popUpWin.classList.remove("show")
+    results.innerText = "Fight! Defeat the computers and save the world."
+    playerScoreDiv.innerText = "Player score: " + playerScore
+    computerScoreDiv.innerText = "Computer score: " + computerScore 
+}

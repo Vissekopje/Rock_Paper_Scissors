@@ -1,0 +1,51 @@
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    padding-left: 700px;
+    padding-right: 700px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-radius: 10px;
+}
+.Rock,
+.Paper,
+.Scissors{
+    font-size: 36px;
+}
+.status{
+    justify-content: center;
+    align-content: center; 
+    text-align: center;
+    margin: 10px;
+    font-size: 48px;
+}
+.popUpWin {
+    background-color: rgba(0, 0, 0, 0.911);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 90px;
+    color: white;
+    display: none;
+}
+
+.popUpWin.show {
+    display: flex;
+}
+
+.restartButton {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    padding: 12px 24px;
+    font-size: 24px;
+    border-radius: 10px;
+}
